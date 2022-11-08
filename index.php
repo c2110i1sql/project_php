@@ -38,7 +38,6 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-
     
    <div class="top-product my-5">
    <div class="container">
