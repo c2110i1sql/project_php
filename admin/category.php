@@ -1,4 +1,8 @@
-<?php include 'header.php';?>
+<?php 
+include 'header.php';
+$sql_cate = "SELECT * FROM category ORDER BY name ASC";
+$categories = mysqli_query($conn, $sql_cate);
+?>
   <!-- =============================================== -->
   <?php include 'aside.php';?>
 
@@ -41,78 +45,27 @@
           <table class="table table-bordered table-hover">
             <thead>
               <tr>
-                <th>STT</th>
+                <th>Id</th>
                 <th>Name</th>
                 <th>Status</th>
-                <th>Created date</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
-              <tr class="text-right">
-                <td>1</td>
-                <td>Áo nam</td>
-                <td>Hiển thị</td>
-                <td>15/10/2022</td>
-                <td>
+            <?php foreach($categories as $cat) : ?>                       
+              <tr>
+                <td><?= $cat['id'];?></td>
+                <td><?= $cat['name'];?></td>
+                <td><?= $cat['status'] == 0? 'Tạm ẩn' : 'Hiển thị';?></td>
+                <td class="text-right">
                   <a href="" class="btn btn-primary"><i class="fa fa-edit"></i></a>
                   <a href="" class="btn btn-success"><i class="fa fa-eye"></i></a>
                   <a href="" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                  
                 </td>
               </tr>
-              <tr class="text-right">
-                <td>1</td>
-                <td>Áo nam</td>
-                <td>Hiển thị</td>
-                <td>15/10/2022</td>
-                <td>
-                  <a href="" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-                  <a href="" class="btn btn-success"><i class="fa fa-eye"></i></a>
-                  <a href="" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                  
-                </td>
-              </tr>
-              <tr class="text-right">
-                <td>1</td>
-                <td>Áo nam</td>
-                <td>Hiển thị</td>
-                <td>15/10/2022</td>
-                <td>
-                  <a href="" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-                  <a href="" class="btn btn-success"><i class="fa fa-eye"></i></a>
-                  <a href="" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                  
-                </td>
-              </tr>
-              <tr class="text-right">
-                <td>1</td>
-                <td>Áo nam</td>
-                <td>Hiển thị</td>
-                <td>15/10/2022</td>
-                <td>
-                  <a href="" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-                  <a href="" class="btn btn-success"><i class="fa fa-eye"></i></a>
-                  <a href="" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                  
-                </td>
-              </tr>
-              <tr class="text-right">
-                <td>1</td>
-                <td>Áo nam</td>
-                <td>Hiển thị</td>
-                <td>15/10/2022</td>
-                <td>
-                  <a href="" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-                  <a href="" class="btn btn-success"><i class="fa fa-eye"></i></a>
-                  <a href="" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                  
-                </td>
-              </tr>
-
+            <?php endforeach;?>
             </tbody>
           </table>
-          
           
         </div>
 

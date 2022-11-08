@@ -1,4 +1,11 @@
-<?php  include 'data.php';?>
+<?php 
+    include 'connect.php';
+    include 'data.php';
+
+    $sql_cate = "SELECT * FROM category ORDER BY name ASC";
+    $categories = mysqli_query($conn, $sql_cate);
+    
+?>
 <!doctype html>
 <html lang="en">
   <head>
