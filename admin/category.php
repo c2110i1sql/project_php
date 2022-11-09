@@ -58,7 +58,7 @@ $categories = mysqli_query($conn, $sql_cate);
                             <td><?= $cat['name'];?></td>
                             <td><?= $cat['status'] == 0? 'Tạm ẩn' : 'Hiển thị';?></td>
                             <td class="text-right">
-                                <a href="" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+                                <a href="category-edit.php?id=<?= $cat['id'];?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>
                                 <a href="" class="btn btn-success"><i class="fa fa-eye"></i></a>
                                 <a href="category-delete.php?id=<?= $cat['id'];?>" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                             </td>
