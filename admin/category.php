@@ -32,14 +32,14 @@ $categories = mysqli_query($conn, $sql_cate);
                         <input type="" class="form-control" id="" placeholder="Input field">
                     </div>
                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
-                    <a href="" class="btn btn-warning"><i class="fa fa-plus"></i> Thêm mới</a>
-                    <a href="" class="btn btn-success"><i class="fa fa-cogs"></i></a>
+                    <a href="category-create.php" class="btn btn-warning"><i class="fa fa-plus"></i> Thêm mới</a>
+                    <!-- <a href="" class="btn btn-success"><i class="fa fa-cogs"></i></a>
                     <a href="" class="btn btn-success"><i class="fa fa-users"></i></a>
                     <a href="" class="btn btn-success"><i class="fa fa-refresh"></i></a>
                     <a href="" class="btn btn-success"><i class="fa fa-arrow-left"></i></a>
                     <a href="" class="btn btn-success"><i class="fa fa-arrow-right"></i></a>
-                    <a href="" class="btn btn-success"><i class="fa fa-plus"></i></a>
-                    <a href="" class="btn btn-success"><i class="fa fa-save"></i></a>
+                    <a href="" class="btn btn-success"><i class="fa fa-plus"></i></a> -->
+                    <!-- <a href="" class="btn btn-success"><i class="fa fa-save"></i></a> -->
                 </form>
                 <hr>
                 <table class="table table-bordered table-hover">
