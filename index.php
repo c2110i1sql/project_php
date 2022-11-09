@@ -1,33 +1,24 @@
-<?php include 'header.php';?>
+<?php 
+include 'header.php';
+$banners = mysqli_query($conn,"SELECT * FROM banner WHERE status = 1 ORDER BY id desc");
+?>
 
     <div id="carouselId" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
-            <li data-target="#carouselId" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselId" data-slide-to="1"></li>
-            <li data-target="#carouselId" data-slide-to="2"></li>
+        `<?php foreach($banners as $key => $banner) : ?>
+            <li data-target="#carouselId" data-slide-to="<?= $key;?>" class="<?= $key == 0 ? 'active' :'';?>"></li>
+            <?php endforeach;?>
         </ol>
         <div class="carousel-inner" role="listbox">
-            <div class="carousel-item active">
-                <img src="https://i.pinimg.com/originals/4e/21/21/4e21214e901ffbf8495936f700d4ccaa.jpg" alt="First slide">
+            <?php foreach($banners as $key => $banner) : ?>
+            <div class="carousel-item <?= $key == 0 ? 'active' :'';?>">
+                <img src="<?= $banner['image'];?>" alt="First slide">
                 <div class="carousel-caption d-none d-md-block">
-                    <h3>Title</h3>
-                    <p>Description</p>
+                    <h3><?= $banner['name'];?></h3>
+                    <p><?= $banner['desc'];?></p>
                 </div>
             </div>
-            <div class="carousel-item">
-                <img src="https://i.pinimg.com/originals/db/55/fa/db55fa20cca495f5efc3b06c08cdaef9.jpg" alt="Second slide">
-                <div class="carousel-caption d-none d-md-block">
-                    <h3>Title</h3>
-                    <p>Description</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgz3_eROFz6vw8Y_QXI1vy5OShIaPfCXBc5iNnTRxmczkAvOZpp8zbk9k-cciLouacNZ0&usqp=CAU" alt="Third slide">
-                <div class="carousel-caption d-none d-md-block">
-                    <h3>Title</h3>
-                    <p>Description</p>
-                </div>
-            </div>
+            <?php endforeach;?>
         </div>
         <a class="carousel-control-prev" href="#carouselId" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
