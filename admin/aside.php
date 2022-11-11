@@ -32,8 +32,8 @@
             <i class="fa fa-th"></i> <span>Product</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="category.php"><i class="fa fa-circle-o"></i> Danh sách</a></li>
-            <li><a href="category-create.php"><i class="fa fa-circle-o"></i> Thêm mới</a></li>
+            <li><a href="product.php"><i class="fa fa-circle-o"></i> Danh sách</a></li>
+            <li><a href="product-create.php"><i class="fa fa-circle-o"></i> Thêm mới</a></li>
           </ul>
         </li>
 
