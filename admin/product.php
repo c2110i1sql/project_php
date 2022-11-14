@@ -1,5 +1,14 @@
 <?php include 'header.php';
-$products = mysqli_query($conn, "SELECT * FROM product Order By name ASC");
+$sql = "SELECT * FROM product";
+
+if (!empty($_GET['order'])) {
+    $orderArr = explode('-',$_GET['order']);
+    $field = isset($orderArr[0]) ? $orderArr[0] : 'id';
+    $orderType = isset($orderArr[1]) ? $orderArr[1] : 'DESC';
+}
+$sql .=" Order By $field $orderType";
+
+$products = mysqli_query($conn, $sql);
 ?>
 <!-- =============================================== -->
 <?php include 'aside.php';?>
@@ -32,13 +41,24 @@ $products = mysqli_query($conn, "SELECT * FROM product Order By name ASC");
                 </div>
             </div>
             <div class="box-body">
-                <form action="" method="POST" class="form-inline" role="form">
+                <form action="" method="GET" class="form-inline" role="form">
 
                     <div class="form-group">
-                        <label class="sr-only" for="">label</label>
                         <input type="email" class="form-control" id="" placeholder="Input field">
                     </div>
-
+                    <div class="form-group">
+                       
+                       <select name="order" class="form-control">
+                            <option value="">Sắp xếp</option>
+                            <option value="id-ASC">Id a - z</option>
+                            <option value="id-DESC">Id z - a</option>
+                            <option value="name-ASC">Name a - z</option>
+                            <option value="name-DESC">Name z - a</option>
+                            <option value="price-ASC">Price a - z</option>
+                            <option value="price-DESC">Price z - a</option>
+                       </select>
+                       
+                    </div>
                     <button type="submit" class="btn btn-primary">Tìm kiếm</button>
                     <a href="product-create.php" class="btn btn-success ml-1">Thêm mới</a>
                 </form>
