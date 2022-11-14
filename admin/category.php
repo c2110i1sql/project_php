@@ -1,7 +1,33 @@
 <?php 
 include 'header.php';
-$sql_cate = "SELECT * FROM category ORDER BY name ASC";
+// phan trang
+$limit = 3;
+$page = !empty($_GET['page']) ? $_GET['page'] : 1;
+$start = ($page-1) * $limit;
+$sql_cate = "SELECT * FROM category";
+$keyword = '';
+$status = '';
+if (!empty($_GET['keyword']) && empty($_GET['status'])) {
+    $keyword = $_GET['keyword'];
+    $sql_cate = "SELECT * FROM category WHERE name LIKE '%$keyword%'";
+} elseif (empty($_GET['keyword']) && !empty($_GET['status'])) {
+    $status = $_GET['status'];
+    $sql_cate = "SELECT * FROM category WHERE status = '$status' ";
+} else if (!empty($_GET['keyword']) && !empty($_GET['status'])) {
+    $keyword = $_GET['keyword'];
+    $status = $_GET['status'];
+    $sql_cate = "SELECT * FROM category WHERE name LIKE '%$keyword%' AND status = '$status'";
+}
+
+
+// truy vấn lấy ra tổng số dòng;
+$queryRow =  mysqli_query($conn, $sql_cate);
+$count = mysqli_num_rows($queryRow);
+
+$totalPage = ceil($count/$limit);
+$sql_cate .= " ORDER BY name ASC LIMIT $start, $limit";
 $categories = mysqli_query($conn, $sql_cate);
+
 ?>
 <!-- =============================================== -->
 <?php include 'aside.php';?>
@@ -25,21 +51,23 @@ $categories = mysqli_query($conn, $sql_cate);
         <div class="box">
             <div class="box-body">
 
-                <form action="" method="POST" class="form-inline" role="form">
+                <form action="" method="GET" class="form-inline" role="form">
 
                     <div class="form-group">
                         <label class="sr-only" for="">label</label>
-                        <input type="" class="form-control" id="" placeholder="Input field">
+                        <input type="" class="form-control" name="keyword" placeholder="Tìm kiếm...">
+                    </div>
+                    <div class="form-group">
+                       
+                       <select name="status" id="input" class="form-control">
+                        <option value="">Trạng thái</option>
+                        <option value="0">Tạm ẩn</option>
+                        <option value="1">Hiển thị</option>
+                       </select>
+                       
                     </div>
                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
                     <a href="category-create.php" class="btn btn-warning"><i class="fa fa-plus"></i> Thêm mới</a>
-                    <!-- <a href="" class="btn btn-success"><i class="fa fa-cogs"></i></a>
-                    <a href="" class="btn btn-success"><i class="fa fa-users"></i></a>
-                    <a href="" class="btn btn-success"><i class="fa fa-refresh"></i></a>
-                    <a href="" class="btn btn-success"><i class="fa fa-arrow-left"></i></a>
-                    <a href="" class="btn btn-success"><i class="fa fa-arrow-right"></i></a>
-                    <a href="" class="btn btn-success"><i class="fa fa-plus"></i></a> -->
-                    <!-- <a href="" class="btn btn-success"><i class="fa fa-save"></i></a> -->
                 </form>
                 <hr>
                 <table class="table table-bordered table-hover">
@@ -68,7 +96,18 @@ $categories = mysqli_query($conn, $sql_cate);
                 </table>
 
             </div>
+            <div class="pagi">
+                
+                <ul class="pagination">
+                    <li><a href="#">&laquo;</a></li>
+                    <?php for($i=1; $i<= $totalPage; $i++) : ?>
+                    <li <?= $i==$page ? 'class="active"':'';?>><a href="?page=<?= $i;?>&status=<?=$status;?>&keyword=<?=$keyword;?>"><?= $i;?></a></li>
+                    <?php endfor;?>
 
+                    <li><a href="#">&raquo;</a></li>
+                </ul>
+                
+            </div>
         </div>
         <!-- /.box -->
 
