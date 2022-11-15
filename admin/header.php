@@ -1,5 +1,12 @@
 <?php 
 ob_start();
+session_start();
+
+if (isset($_SESSION['admin_login'])) {
+  $admin = $_SESSION['admin_login'];
+} else {
+  header('location: login.php');
+}
   include '../connect.php';
 ?>
 <!DOCTYPE html>
@@ -87,7 +94,7 @@ ob_start();
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="assets/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs"> <?= $admin['name'];?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -95,7 +102,7 @@ ob_start();
                 <img src="assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
+                  <?= $admin['name'];?> - Web Developer
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>
@@ -120,7 +127,7 @@ ob_start();
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="logout.php" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>

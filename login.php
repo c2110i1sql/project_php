@@ -4,7 +4,6 @@ $error =null;
 if (isset($_POST['email'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
-
     if ($email == 'admin@gmail.com' && $password == '123456') {
         $_SESSION['my_login'] = $email;
         header('location: profile.php');
