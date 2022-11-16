@@ -1,11 +1,12 @@
 <?php 
 include 'header.php';
 $banners = mysqli_query($conn,"SELECT * FROM banner WHERE status = 1 ORDER BY id desc");
+$products = mysqli_query($conn,"SELECT * FROM product WHERE status = 1 ORDER BY id desc");
 ?>
 
     <div id="carouselId" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
-        `<?php foreach($banners as $key => $banner) : ?>
+        <?php foreach($banners as $key => $banner) : ?>
             <li data-target="#carouselId" data-slide-to="<?= $key;?>" class="<?= $key == 0 ? 'active' :'';?>"></li>
             <?php endforeach;?>
         </ol>
@@ -46,7 +47,7 @@ $banners = mysqli_query($conn,"SELECT * FROM banner WHERE status = 1 ORDER BY id
                         <p>
                             <b>Price: <?= number_format($pro['price']);?> đ</b>
                         </p>
-                        <a href="" class="btn btn-sm btn-primary">Xem tiếp</a>
+                        <a href="cart-process.php?id=<?=$pro['id'];?>" class="btn btn-sm btn-success">Thêm giỏ hàng</a>
                     </p>
                 </div>
                 </div>
@@ -74,7 +75,7 @@ $banners = mysqli_query($conn,"SELECT * FROM banner WHERE status = 1 ORDER BY id
                         <p>
                             <b>Price: <?= number_format($pro['price']);?> đ</b>
                         </p>
-                        <a href="" class="btn btn-sm btn-primary">Xem tiếp</a>
+                        <a href="" class="btn btn-sm btn-success">Thêm giỏ hàng</a>
                     </p>
                 </div>
                 </div>

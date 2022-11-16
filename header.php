@@ -48,6 +48,7 @@
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="text" placeholder="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <a class="btn btn-outline-danger my-2 my-sm-0" href="cart.php">Giỏ hàng</a>
             </form>
         </div>
        </div>
