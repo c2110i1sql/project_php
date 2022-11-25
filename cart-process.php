@@ -1,8 +1,7 @@
 <?php 
 session_start();
 include 'connect.php';
-include 'SCart.php';
-$cart = new Cart;
+
 $id = !empty($_GET['id']) ? $_GET['id'] : 0;
 $action = !empty($_GET['action']) ? $_GET['action'] : 'add'; // add, delete, update, clear
 $quantity = !empty($_GET['quantity']) ? $_GET['quantity'] : 1; // add, delete, update, clear
@@ -11,13 +10,28 @@ $quantity = $quantity > 0 ? ceil($quantity) : 1;
 $carts = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
 
 if ($action == 'add') {
-    $sql = "SELECT * FROM product WHERE id = $id";
-    $query = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($query) == 1) {
-        $pro = mysqli_fetch_assoc($query);
-        $cart->add($pro);
-       
+    
+
+    if (isset($carts[$id])) {
+        $carts[$id]['quantity'] += $quantity;
+    } else {
+        $sql = "SELECT * FROM product WHERE id = $id";
+        $query = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($query) == 1) {
+            $pro = mysqli_fetch_assoc($query);
+            $cart_item = [
+                'id' => $pro['id'],
+                'name' => $pro['name'],
+                'image' => $pro['image'],
+                'price' => setPrice($pro['price'], $pro['sale']),
+                'quantity' => $quantity
+            ];
+        }
+        
+        $carts[$id] = $cart_item;  
     }
+
+    $_SESSION['cart'] = $carts;
 }
 
 
